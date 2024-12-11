@@ -1,13 +1,9 @@
 #!/usr/bin/python
 #!/usr/bin/env python
-import os
-
-
 
 # Creamos las funciones necesarias para el programa 
 
 # Funcion para mostrar el menu principal del programa
-
 def menu_principal():
     print("\n---- Menú de películas ----")
     print("1. Listar películas")
@@ -77,6 +73,7 @@ def eliminar_pelicula(peliculas):
 
 # Programa principal
 def main():
+    
     peliculas = []  # Lista para almacenar las peliculas
     
     while True: 
@@ -96,8 +93,7 @@ def main():
         else:
             print("\nOpción no válida, por favor intentalo de nuevo.")
 
-# Limpiamos la terminal antes de imprimir
-os.system('cls' if os.name == 'nt' else 'clear')
+
 
 # Ejecutamos el programa
 if __name__ == "__main__":
