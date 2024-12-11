@@ -1,5 +1,8 @@
 #!/usr/bin/python
 #!/usr/bin/env python
+import os
+
+
 
 # Creamos las funciones necesarias para el programa 
 
@@ -51,7 +54,7 @@ def agregar_pelicula(peliculas): # Peliculas es una lista de peliculas que se cr
     pelicula = input("Nombre de la película: ").strip() # Quitamos los espacios en blanco al principio y al final de la cadena
     peliculas.append(pelicula)
     # Mostramos la pelicula añadida
-    print(f"Película'{pelicula}'añadida correctamente.")
+    print(f"Película' {pelicula} 'añadida correctamente.")
 
 # Funcion para eliminar una pelicula
 
@@ -66,7 +69,7 @@ def eliminar_pelicula(peliculas):
         opcion = int(input("\nElija la película a eliminar (número): "))
         if 1 <= opcion <= len(peliculas): # Verificamos que la opcion sea valida
             pelicula_eliminar = peliculas.pop[opcion - 1] # Eliminamos la pelicula
-            print(f"\nPelícula '{pelicula_eliminar}' eliminada correctamente.")
+            print(f"\nPelícula ',{pelicula_eliminar},' eliminada correctamente.")
         else: 
             print("\nOpción no válida.")
     except ValueError:
@@ -93,8 +96,10 @@ def main():
         else:
             print("\nOpción no válida, por favor intentalo de nuevo.")
 
-# Ejecutamos el programa
+# Limpiamos la terminal antes de imprimir
+os.system('cls' if os.name == 'nt' else 'clear')
 
+# Ejecutamos el programa
 if __name__ == "__main__":
     main()
 
