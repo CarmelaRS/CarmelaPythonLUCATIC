@@ -64,7 +64,7 @@ def eliminar_pelicula(peliculas):
     try:
         opcion = int(input("\nElija la película a eliminar (número): "))
         if 1 <= opcion <= len(peliculas): # Verificamos que la opcion sea valida
-            pelicula_eliminar = peliculas.pop[opcion - 1] # Eliminamos la pelicula
+            pelicula_eliminar = peliculas.pop(opcion - 1) # Eliminamos la pelicula
             print(f"\nPelícula ',{pelicula_eliminar},' eliminada correctamente.")
         else: 
             print("\nOpción no válida.")
