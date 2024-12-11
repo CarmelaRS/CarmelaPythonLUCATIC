@@ -1,5 +1,9 @@
 #!/usr/bin/python
 #!/usr/bin/env python
+import os
+
+# Limpiamos la terminal antes de imprimir
+os.system('cls' if os.name == 'nt' else 'clear')
 
 # Creamos las funciones necesarias para el programa 
 
@@ -65,7 +69,7 @@ def eliminar_pelicula(peliculas):
         opcion = int(input("\nElija la película a eliminar (número): "))
         if 1 <= opcion <= len(peliculas): # Verificamos que la opcion sea valida
             pelicula_eliminar = peliculas.pop(opcion - 1) # Eliminamos la pelicula
-            print(f"\nPelícula ',{pelicula_eliminar},' eliminada correctamente.")
+            print(f"\nPelícula '{pelicula_eliminar}' eliminada correctamente.")
         else: 
             print("\nOpción no válida.")
     except ValueError:
