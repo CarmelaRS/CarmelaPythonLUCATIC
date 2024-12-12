@@ -95,3 +95,37 @@ print("Las prendas que no están en mujer son: ", diffhombre)
 diffarmariosimetrica = mujer ^ hombre
 print("Las prendas que están en algún armario pero no en ambos son: ", diffarmariosimetrica)
 
+print("===================================================================")
+print("CASOS DE USO DICCIONARIOS")
+
+# Creamos un diccionario con las profesiones de un grupo de personas
+trabajadores = {
+    "Juan": "Programador",
+    "Maria": "Diseñadora",
+    "Pedro": "Encargado de seguridad",
+    "Ana": "Productor audiovisual"
+}
+
+# Mostramos el diccionario
+print("Trabajadores: ", trabajadores)
+
+# Accedemos al trabajo de 'Pedro'
+print("Trabajo de Pedro: ", trabajadores["Pedro"])
+
+# Añadimos un nuevo trabajador
+trabajadores["Luis"] = "Gerente"
+print("Trabajadores despues de añadir Luis: ", trabajadores)
+
+# Eliminamos un trabajador
+del trabajadores["Pedro"]
+print("Trabajadores despues de eliminar Pedro: ", trabajadores)
+
+# Modificamos el trabajo de 'Ana'
+trabajadores["Luis"] = "Encargado de mantenimiento"
+print("Trabajadores despues de modificar Luis: ", trabajadores)
+
+# Numerar los trabajadores
+print("Trabajadores numerados: ")
+for indice, nombre in enumerate(trabajadores):
+    print(indice, nombre)
+print("===================================================================")
