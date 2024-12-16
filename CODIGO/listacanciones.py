@@ -17,7 +17,7 @@ canciones_dict = dict(zip(canciones, duraciones))
 print(canciones_dict)
 
 # Ordenamos el diccionario con sorted() y guardamos las 3 con mayor duración 
-
+# USAMOS LAMbda para comparar los valores de las duraciones
 canciones_dict_ordenadas = dict(sorted(canciones_dict.items(), key=lambda x: x[1], reverse=True)[:3])
 
 print("\nLas 3 películas con mayor duración son:")

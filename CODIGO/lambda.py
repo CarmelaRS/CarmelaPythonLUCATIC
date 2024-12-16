@@ -20,3 +20,16 @@ productos.sort(key=lambda x: x[1], reverse=True)
 
 print("Productos ordenados por cantidad (descendente):")
 print(productos)
+
+# Ejemplo filtrar y aplicar operaciones
+# CASO DE USO: FILTRAR ELEMENTOS DE UNA LISTA 
+# Obtenemos solo los pares 
+numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+pares = list(filter(lambda x: x % 2 == 0, numeros))
+
+print("Numeros pares:")
+print(pares)
+
+# Caso de uso: Realizar operaciones con cada elemento de una lista 
+cuadrados = list(map(lambda x: x ** 2, numeros))
+print(cuadrados)

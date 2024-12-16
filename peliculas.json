@@ -1,0 +1,12 @@
+{
+    "peter pan": {
+        "director": "abc",
+        "anio": 1234,
+        "presupuesto": 1.0
+    },
+    "101 dalmatas": {
+        "director": "bca",
+        "anio": 4567,
+        "presupuesto": 123.0
+    }
+}
