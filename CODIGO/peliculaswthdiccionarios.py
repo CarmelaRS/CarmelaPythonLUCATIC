@@ -15,7 +15,8 @@ def menu_principal():
     print("3. Mostrar película")
     print("4. Modificar película")
     print("5. Buscar película")
-    print("6. Salir")
+    print("6. Añadir IVA")
+    print("7. Salir")
     print("\nElija una opción:")
     return input()
 print("\n---------------------------")
@@ -134,6 +135,19 @@ def buscar_pelicula(peliculas):
     else:
         print(f"\nNo se encontró la película '{titulo}'.")
 
+# FUNCION AÑADIR IVA
+def añadir_iva(peliculas):
+   # Si no hay peliculas, muestra un mensaje
+    if not peliculas:
+        print("\nNo hay películas agregadas.")
+        return  # Salimos de la función si no hay películas
+    
+    # Recorrer todas las películas y aumentar el presupuesto en un 10%
+    for titulo, pelicula in peliculas.items():
+        nuevo_presupuesto = pelicula['presupuesto'] * 1.10  # Incrementamos el presupuesto en un 10%
+        pelicula['presupuesto'] = nuevo_presupuesto  # Actualizamos el presupuesto
+        print(f"\nEl presupuesto de la película '{titulo.title()}' ha sido incrementado a {nuevo_presupuesto} millones.")
+        
 # FUNCION MAIN
 def main():
     # Creamos un diccionario vacío para almacenar las peliculas
@@ -154,6 +168,8 @@ def main():
         elif opcion == "5":
             buscar_pelicula(peliculas)
         elif opcion == "6":
+            añadir_iva(peliculas)
+        elif opcion == "7":
             print("\nSaliendo del programa...")
             break
         else:
