@@ -42,6 +42,6 @@ print('Tiendas: ', tienda)
 
 # Una vez se usa un zip se debe volver a crear otro, por ejemplo ahora no funcionara el zip de doctores y especialidades
 
-print("Funcion ZIP despues de usarla")
+print("Funcion ZIP despues de usarla -- El zip ya esta consumido")
 print("Doctores y especialidades:")
 print( list(ziplist))
