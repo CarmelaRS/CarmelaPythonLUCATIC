@@ -136,4 +136,52 @@ print("Suma acumulativa de serie1:", suma_acumulativa)
 producto_acumulativo = serie1.cumprod()
 print("Producto acumulativo de serie1:",
 producto_acumulativo)
+print("===================================================================")
 
+# Acceso a elementos y slicing 
+# Acceso por indice 
+elemento = serie1[2]
+print("Tercer elemento: ", elemento)
+
+# Slicing por Indice numerico 
+sub_serie = serie1[1:4]
+print("Slicing del segundo al cuarto elemento: \n", sub_serie)
+
+# Acceso por indice de etiqueta 
+serie_con_etiqueta = pd.Series([10, 20, 30], index=['a', 'b', 'c'])
+elemento_etiqueta = serie_con_etiqueta['b']
+print("Elemento con etiqueta 'b': ", elemento_etiqueta)
+
+# Slicing por Indice de etiqueta 
+sub_indice_etiquetas = serie_con_etiqueta['a':'c']
+print("Slicing con eltiquetas de 'a' a 'c':\n", sub_indice_etiquetas)
+
+# ACCESO CON .Loc[] y .iloc[]
+# Loc[] para acceso basado en etiquetas y .iloc[] para acceso basado en posicion 
+elemento_loc = serie_con_etiqueta.loc['c']
+elemento_iloc = serie1.iloc[2]
+
+print("Acceso con .loc[]", elemento_loc)
+print("Acceso con .iloc[]", elemento_iloc)
+print("===================================================================")
+
+# append no funciona en panda por lo que se usa concat para añadir nuevos elementos 
+serie_concatenada = pd.concat([serie1, serie2], ignore_index = True)
+print("Serie concatenada (AÑADIR ELEMENTOS):\n", serie_concatenada)
+print("===================================================================")
+
+# ORDEN ASCENDENTE
+ascendente = serie_concatenada.sort_values()
+print("ORDEN ASCENDENTE:\n", ascendente)
+
+# ORDEN DESCENDENTE
+descendente = serie_concatenada.sort_values(ascending=False)
+print("ORDEN DESCENDENTE:\n", descendente)
+print("===================================================================")
+
+# ELIMINAR DATOS 
+print("ELIMINAR DATOS")
+
+# ELIMINAR DATOS DUPLICADOS 
+sinduplicados = serie_concatenada.drop_duplicates()
+print("Serie sin duplicados:\n", sinduplicados)
