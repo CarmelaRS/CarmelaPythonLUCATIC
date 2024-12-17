@@ -78,7 +78,7 @@ print("Suma total de serie1: ", suma_total)
 
 # MINIMOS Y MAXIMOS 
 minimo = serie1.min()
-maximos = serie1.max()
+maximo = serie1.max()
 print("Minimo de serie1: ", minimo)
 print("Maximo de serie1: ", maximo)
 
@@ -88,7 +88,7 @@ print("Numero de elementos de serie1: ", conteo)
 
 # UNIQUE
 valores_unicos = serie1.unique()
-printo("Valores unicos en serie1: ", valores_unicos)
+print("Valores unicos en serie1: ", valores_unicos)
 
 # VALUE_COUNTS
 valores_cuenta = serie1.value_counts()
@@ -185,3 +185,22 @@ print("ELIMINAR DATOS")
 # ELIMINAR DATOS DUPLICADOS 
 sinduplicados = serie_concatenada.drop_duplicates()
 print("Serie sin duplicados:\n", sinduplicados)
+
+# ELIMINAR VALORES NULOS 
+sinnulos = serie_concatenada.dropna()
+print("Serie sin nulos: \n", sinnulos)
+
+# ELIMINAR POR INDICE
+serie_sin_indice = serie_concatenada.drop(serie_concatenada.index[2])
+print("Serie sin el tercer elemento:\n", serie_sin_indice)
+
+# ELIMINAR POR ETIQUETA 
+serie3 = pd.Series([10, 20, 30], index=['a', 'b', 'c'])
+serie_sin_etiqueta = serie3.drop('a')
+print("Serie sin el elemento con etiqueta 'a':\n", serie_sin_etiqueta)
+
+# ELIMINAR POR CONDICION
+serie_sin_condicion = serie_concatenada.drop(serie_concatenada[serie_concatenada > 5].index)
+print("Serie sin elementos mayores a 5:\n", serie_sin_condicion)
+
+print("===================================================================")
