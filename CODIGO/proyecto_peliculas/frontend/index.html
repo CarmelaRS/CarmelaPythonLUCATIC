@@ -1,0 +1,118 @@
+<!-- Creamos un proyecto html con un script para peliculas -->
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicacion de peliculas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>Gestor de PELICULAS</h1>
+    <!-- BOTONES PRINCIPALES -->
+    <div>
+        <button id="btnListar">Listar Peliculas</button>
+        <button id="btnAgregar">Agregar Pelicula</button>
+        <button id="btnBuscar">Buscar Pelicula</button>
+        <button id="btnModificar">Modificar Pelicula</button>
+        <button id="btnEliminar">Eliminar Pelicula</button>
+    </div>
+
+    <!-- AGREGAR PELICULA -->
+    <!-- Formulario para agregrar una pelicula-->
+    <div>
+        <h2>Agregar Pelicula</h2>
+        <form id="formagregar">
+            <input type="text" id="tituloAgregar" placeholder="Título" required>
+            <input type="text" id="directorAgregar" placeholder="Director" required>
+            <input type="number" id="anioAgregar" placeholder="Año" required>
+            <input type="number" id="presupuestoAgregar" placeholder="Presupuesto" required>
+        </form>
+        <button id="btnAgregar">Agregar</button>
+    </div>
+
+    <!-- BUSCAR PELICULA -->
+    <!-- Formulario para buscar una pelicula-->
+    <div id="seccionBuscar" class="seccion oculto">
+        <h2>Buscar Pelicula</h2>
+        <!--Mostramos primero las peliculas que hay -->
+        <table id="tablaPeliculas">
+            <thead>
+                <tr>
+                    <th> ID </th>
+                    <th>Título</th>
+                    <th>Director</th>
+                    <th>Año</th>
+                    <th>Presupuesto</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoTabla"></tbody>
+        </table>
+        <!-- Pedimos al usuario el ID de la pelicula -->
+        <input type="text" id="buscarID" placeholder="ID a buscar" <button id="btnBuscar">Buscar</button>
+    </div>
+
+    <!-- MODIFICAR PELICULA -->
+    <!-- Formulario para modificar una pelicula-->
+    <div id="seccionModificar" class="seccion oculto">
+        <h2>Modificar Pelicula</h2>
+        <!-- Mostramos primero las peliculas que hay -->
+        <table id="tablaPeliculasModificar">
+            <thead>
+                <tr>
+                    <th> ID </th>
+                    <th>Título</th>
+                    <th>Director</th>
+                    <th>Año</th>
+                    <th>Presupuesto</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoTablaModificar"></tbody>
+        </table>
+        <!-- Pedimos al usuario el ID de la pelicula -->
+        <input type="text" id="buscarIDModificar" placeholder="ID a modificar" <button
+            id="btnBuscarModificar">Buscar</button>
+        <!-- Formulario para modificar los datos de una pelicula-->
+        <form id="formModificar">
+            <!-- <input type="text" id="idModificar" placeholder="ID" disabled> -->
+            <input type="text" id="tituloModificar" placeholder="Título" required>
+            <input type="text" id="directorModificar" placeholder="Director" required>
+            <input type="number" id="anioModificar" placeholder="Año" required>
+            <input type="number" id="presupuestoModificar" placeholder="Presupuesto" required>
+        </form>
+        <button id="btnModificar">Modificar</button>
+    </div>
+
+    <!-- ELIMINAR PELICULA -->
+    <div id="seccionEliminar" class="Seccion oculto">
+        <h2> Eliminar Pelicula </h2>
+        <!-- Mostramos primero las peliculas que hay -->
+        <table id="tablaPeliculasEliminar">
+            <thead>
+                <tr>
+                    <th> ID </th>
+                    <th>Título</th>
+                    <th>Director</th>
+                    <th>Año</th>
+                    <th>Presupuesto</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoTablaEliminar"></tbody>
+        </table>
+        <!-- Pedimos al usuario el ID de la pelicula -->
+        <input type="text" id="buscarIDEliminar" placeholder="ID a eliminar" <button
+            id="btnBuscarEliminar">Buscar</button>
+        <button id="btnEliminar">Eliminar</button>
+    </div>
+
+    <!-- LISTAR PELICULAS -->
+    <h2> PELICULAS </h2>
+    <ul id="listarPeliculas"></ul>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
