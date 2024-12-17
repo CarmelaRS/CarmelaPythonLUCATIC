@@ -93,3 +93,47 @@ printo("Valores unicos en serie1: ", valores_unicos)
 # VALUE_COUNTS
 valores_cuenta = serie1.value_counts()
 print("Conteo de valores en serie1: ", valores_cuenta)
+
+# MODA
+moda = serie1.mode()
+print("Moda de serie1:", moda)
+
+# VARIANZA
+varianza = serie1.var()
+print("Varianza de serie1:", varianza)
+
+# DESCIPCION 
+descripcion = serie1.describe()
+print("Descripción de serie1:\n", descripcion)
+
+# CORRELACION 
+corr = serie1.corr(serie2)
+print("Correlación entre serie1 y serie2:", corr)
+
+# COVARIANZA
+cov = serie1.cov(serie2)
+print("Covarianza entre serie1 y serie2:", cov)
+
+# Valores quialitativos a serie1 
+cuantil_25 = serie1.quantile(0.25)
+cuantil_50 = serie1.quantile(0.50) # == MEDIANA
+cuantil_75 = serie1.quantile(0.75)
+
+print("Cuantil 25% de serie1:", cuantil_25)
+print("Cuantil 50% (mediana) de serie1:", cuantil_50)
+print("Cuantil 75% de serie1:", cuantil_75)
+
+# Creamos una serie de numeros negativos
+serie_negativa = pd.Series([-1, -2, -3, 4])
+valores_absolutos = serie_negativa.abs()
+print("Valores absolutos:", valores_absolutos)
+
+# SUMA ACUMULATIVA
+suma_acumulativa = serie1.cumsum()
+print("Suma acumulativa de serie1:", suma_acumulativa)
+
+# PRODUCTO ACUMULATIVO
+producto_acumulativo = serie1.cumprod()
+print("Producto acumulativo de serie1:",
+producto_acumulativo)
+
