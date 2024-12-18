@@ -401,4 +401,4 @@ print ("NUEVO DF PELICULAS: \n", df_peliculas_info)
 # Reemplazamos valores en las columnas
 df_peliculas_info.replace('...', 'Desconocida', inplace=True)
 
-print("\nNUEVO DF PELICULAS CAMBIANDO POR DESCONOCIDAS: \n", df_peliculas_info)
+print("\nNUEVO DF PELICULAS CAMBIANDO POR DESCONOCIDAS:   \n", df_peliculas_info)
