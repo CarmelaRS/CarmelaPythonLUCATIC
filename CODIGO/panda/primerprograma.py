@@ -204,3 +204,201 @@ serie_sin_condicion = serie_concatenada.drop(serie_concatenada[serie_concatenada
 print("Serie sin elementos mayores a 5:\n", serie_sin_condicion)
 
 print("===================================================================")
+print("FUSION")
+# Preparacion de df a fusionar 
+peliculas_data = {
+    'ID': [1,2,3,4,5,6,7,8,9,10,11,12],
+    'Película': ['Avatar', 'Vengadores: Endgame', 'Avatar 2', 'Titanic', 'Star Wars: Episodio VII - El despertar de la Fuerza', 'Vengadores: Infinity War', 'Spider-Man: No Way Home',
+    'Jurassic World', 'El Rey León', 'Los Vengadores', 'Frozen II', 'La Bella y la Bestia'],
+    'Año de Emisión': [2009, 2019, 2022, 1997, 2015, 2018, 2021, 2015, 2019, 2012, 2019, 2017],
+    'Género': ['Ciencia ficción', 'Acción', 'Ciencia ficción', 'Drama', 'Ciencia ficción', 'Acción', 'Acción', 'Ciencia ficción', 'Animación', 'Acción', 'Animación', 'Romance'],
+    'Duración (minutos)': [162, 181, 190, 195, 138, 149, 148, 124, 89, 143, 103, 129],
+    'Calificación IMDB': [7.8, 8.4, 8.1, 7.8, 7.8, 8.4, 8.2, 7.0, 7.1, 8.0, 6.8, 7.1]
+}
+
+finanzas_data = {
+    'ID': [1,2,3,4,5,6,7,8,9,10,11,12],
+    'Recaudación': [ 2923706026, 2799439100, 2320250233, 2264743180, 2071521700 , 2052359754, 1921704167, 1670516444, 1663075439, 1520538515, 1453000000, 1264000000],
+    'Presupuesto': [237000000, 356000000, 250000000, 200000000, 245000000, 321000000, 200000000, 150000000, 260000000, 220000000, 150000000, 160000000],
+    'Ganancias': [5543706026, 3159439100, 2070250233, 2064743180, 1826521700, 1732359754, 1721704167, 1520516444, 1403075439, 1300538515, 1303000000, 1104000000]
+}
+#Creamos DF 
+dfPeliculas = pd.DataFrame(peliculas_data)
+dfFinanzas = pd.DataFrame(finanzas_data)
+
+# CONCATENAR 
+dfconcatenar = pd.concat([dfPeliculas, dfFinanzas])
+print("Concatenar:\n", dfconcatenar)
+
+# UNIR
+dfunir = pd.merge(dfPeliculas, dfFinanzas, on='ID', how="inner", validate="one_to_one")
+print("Unir:\n", dfunir) 
+print("===================================================================")
+
+# OPCION 1: COMPLETAR DATOS
+# dataframe adicional 
+df_adicional = pd.DataFrame({
+    'ID': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    'Director': ['James Cameron', 'Anthony y Joe Russo', 'James Cameron', 'James Cameron', 'J.J. Abrams', 'Anthony y Joe Russo', 'Jon Watts', 'Colin Trevorrow', 'Jon Favreau', 'Joss Whedon', 'Chris Buck y Jennifer Lee', 'Bill Condon'],
+    'Premios Oscar': [3, 0, 0, 11, 0, 0, 0, 0, 0, 1, 0, 0],
+    'Globos de Oro': [2, 0, 0, 4, 0, 0, 0, 0, 0, 0, 1, 1]
+})
+
+# Añadimos una nueva clave a DF con la suma de los premios 
+df_adicional['Total Premios'] = df_adicional['Premios Oscar'] + df_adicional['Globos de Oro']
+
+# Mostramos datos 
+print("TODOS LOS DATOS: \n", df_adicional)
+
+# OPCION 2: COMPLETAR DATOS USANDO MERGE
+df_premios = pd.DataFrame({
+    'ID': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    'Total Premios 2': df_adicional['Premios Oscar'] + df_adicional['Globos de Oro']
+})
+
+# Fusion de DF
+df_adicional2 = pd.merge(df_adicional, df_premios, on='ID', how='left')
+# Mostramos datos 
+print("TODOS LOS DATOS 2: \n", df_adicional2)
+
+# Prescindimos de columnas con DROP
+df_final = df_adicional.drop(['Premios Oscar', 'Globos de Oro'], axis=1)
+print(" RESULTADOS FINALES:\n", df_final)
+print("===================================================================")
+
+# ORDENAMOS CON SORT 
+df_final.sort_values(by='Total Premios', ascending=False, inplace=True)
+print("-------ORDEN POR PREMIOS ----------------")
+print(df_final.to_string(index=False))
+
+df_final.sort_values(by='Director', ascending=True, inplace=True)
+print("-------ORDEN POR DIRECTOR ----------------")
+print(df_final.to_string(index=False))
+print("===================================================================")
+
+# FILTROS 
+# Creamos un DF (df_dinal1) con los datos de dfunir
+
+df_final1 = pd.merge(df_adicional, dfunir, on='ID', how='left')
+print(df_final1)
+
+print('------ Filtro por Género: Acción --------')
+df_accion = df_final1[df_final1['Género'] == 'Acción']
+print(df_accion.head(3).to_string(index=False))
+
+print('------ Filtro por Ganancia: Mayor de 2000M --------')
+df_filtrado_presupuesto = df_final1[df_final1['Ganancias'] > 2_000_000_000]
+print(df_filtrado_presupuesto.to_string(index=False))
+
+print("===================================================================")
+
+# COLUMNA CALCULADA: rentabilidad%
+print('------ Rentabilidad% --------')
+df_final1['Rentabilidad%'] = round(df_final1['Ganancias'] / df_final1['Presupuesto'] * 100, 2)
+print(df_final1.to_string(index=False))
+print("===================================================================")
+
+# AGRUPACION 
+# Agrupamos directores por recaudacion y premios 
+print('------ Agrupación Director por recaudación y premios --------')
+df_agrupado_directores = df_final1.groupby('Director').agg({
+    'Recaudación': 'mean', 
+    'Total Premios': 'sum'
+}).reset_index()
+
+print(df_agrupado_directores.to_string(index=False))
+
+# Ordenamos por total premios 
+df_agrupado_directores.sort_values(by=['Total Premios', 'Recaudación'], ascending=[False, False], inplace=True)
+
+print('------ Agrupación Director por recaudación y premios (Ordenados) --------')
+print(df_agrupado_directores.to_string(index=False))
+print("===================================================================")
+
+# ACCESO 
+# con .loc mas conciso 
+df_james_cameroloc = df_agrupado_directores.loc[df_agrupado_directores['Director'] == 'James Cameron']
+
+print('------ Director James Cameron con LOC--------')
+print(df_james_cameroloc.to_string(index=False))
+
+# Sin loc, menos conciso
+df_james_camero = df_agrupado_directores[df_agrupado_directores['Director'] == 'James Cameron']
+
+print('------ Director James Cameron sin LOC--------')
+print(df_james_camero.to_string(index=False))
+
+# DIRECTOR COMO INDEX
+
+df_agrupado_directores.set_index('Director', inplace=True)
+
+print('\nLa recaudación de James Cameron: ' + str(df_agrupado_directores.loc['James Cameron', 'Recaudación'])+'\n')
+print("===================================================================")
+print(df_final1)
+# APLICAMOS UNA FUNCION A UNA COLUMNA 
+# RENTABILIDAD EN MILLONES DE DOLARES POR MINUTOS DE PELICULA 
+df_final1['Rentabilidad por minuto'] = df_final1.apply(lambda x: round((x['Ganancias']/x['Duración (minutos)'])/1_000_000, 2), axis=1)
+
+print('------ Rentabilidad por minuto --------')
+print(df_final1[['Película', 'Rentabilidad por minuto']].to_string(index=False))
+
+# Agrupar y realizar una operacion de agregacion 
+df_grouped = df_final1.groupby('Género')['Rentabilidad por minuto'].mean().reset_index()
+df_grouped.sort_values('Rentabilidad por minuto', ascending=False, inplace=True)
+
+print('------ Rentabilidad por género --------')
+print(df_grouped.to_string(index=False))
+
+print("===================================================================")
+
+# ITERACION 
+
+print("-------- ITERROWS() --------")
+# Itera sobre filas del DF como pares (indice, serie)
+for index, row in df_final1.iterrows():
+    print( index,"\n", row) ## NO LO MUESTRA EN TABLA
+    print("------------------------------------------------------------------------------------------------")
+   # print(f'Indice: {index}, Pelicula: {row["Película"]}, Recaudación: {row["Recaudación"]}')
+
+# OPCION 2
+for index, row in df_final1.iterrows():
+    print(f'Indice: {index}, Pelicula: {row["Película"]}, Recaudación: {row["Recaudación"]}') ## SI QUIERO MOSTRAR MAS DATOS LOS AÑADO UNO A UNO 
+    print("------------------------------------------------------------------------------------------------")
+
+print("--------- ITERTUPLES() --------")
+# iteracion sobre filas del df como tuplas nombradas 
+for row in df_final1.itertuples():
+    print(row)
+    print("\n*****************************************************************************************************\n")
+    print(row.Película)
+    print("\n------------------------------------------------------------------------------------------------\n")
+
+print("------ APPLY() ------")
+# Mas rapido para ciertas cosas 
+df_final1.apply(lambda row:print(row), axis=1)
+
+print("------ BUCLE FOR DIRECTO (COLUMNAS) ------")
+# iTERA DIRECTAMENTE CON LAS COLUMNAS 
+for column in df_final1: 
+    print(df_final1[column])
+
+print("\n*****************************************************************************************************\n")
+print("------ REPLACE ------")
+# NUEVOS DF
+nuevodf_peliculas = {
+    'ID': [1,2,3,4,5,6,7,8,9,10,11,12],
+    'Película': ['Avatar', 'Vengadores: Endgame', 'Avatar 2', 'Titanic','Star Wars: Episodio VII - El despertar de la Fuerza','Vengadores: Infinity War', 'Spider-Man: No Way Home','Jurassic World', 'El Rey León', 'Los Vengadores','...', 'La Bella y la Bestia'],
+    'Año de Emisión': [2009, 2019, 2022, 1997, 2015, 2018, 2021, 2015, 2019, 2012, 2019, 2017],
+    'Género': ['Ciencia ficción', 'Acción', 'Ciencia ficción', 'Drama', 'Ciencia ficción','Acción', 'Acción', 'Ciencia ficción', 'Animación', 'Acción','Animación', 'Romance'],
+    'Duración (minutos)': [162, 181, 190, 195, 138, 149, 148, 124, 89, 143, 103, 129],
+    'Calificación IMDB': [7.8, 8.4, 8.1, 7.8, 7.8, 8.4, 8.2, 7.0, 7.1, 8.0, 6.8, 7.1],
+}
+
+# Creamos un nuevo DF con los datos de nuevodf_peliculas
+df_peliculas_info = pd.DataFrame(nuevodf_peliculas)
+print ("NUEVO DF PELICULAS: \n", df_peliculas_info)
+
+# Reemplazamos valores en las columnas
+df_peliculas_info.replace('...', 'Desconocida', inplace=True)
+
+print("\nNUEVO DF PELICULAS CAMBIANDO POR DESCONOCIDAS: \n", df_peliculas_info)
